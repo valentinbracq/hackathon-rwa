@@ -1,15 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const _inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "RWA Tokenization Admin",
-  description: "Admin dashboard for Walled Garden RWA tokenization",
+  description: "Admin dashboard for institutional RWA tokenization",
   generator: "v0.app",
   icons: {
     icon: [
@@ -37,42 +36,63 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
-        <div className="flex h-screen bg-background">
-          <aside className="w-64 bg-gray-900 text-white flex flex-col">
-            <div className="p-6 border-b border-gray-700">
-              <h1 className="text-xl font-bold">RWA Admin</h1>
+      <body className={`font-sans antialiased bg-background text-foreground`}>
+        <nav className="fixed top-0 left-0 right-0 z-50 py-4 backdrop-blur-md border-b border-white/5 bg-card border-l-0 px-10 rounded-2xl mx-24 my-6">
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              {
+              }
+              <img src="/tokena1.png" alt="Tokena" className="h-8 object-contain" />
             </div>
-            <nav className="flex-1 p-4 space-y-2">
-              <a href="/" className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition">
-                <span className="text-xl">📊</span>
-                <span>Dashboard</span>
+
+            {/* Center nav links */}
+            <div className="flex items-center gap-8">
+              <a
+                href="/"
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
+              >
+                Dashboard
+              </a>
+              <a
+                href="/tokenize"
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
+              >
+                Tokenize
+              </a>
+              <a
+                href="/issue"
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
+              >
+                Issue
+              </a>
+              <a
+                href="/clawback"
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
+              >
+                Clawback
               </a>
               <a
                 href="/investors"
-                className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition"
+                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
               >
-                <span className="text-xl">👥</span>
-                <span>Investors</span>
+                Investors
               </a>
-            </nav>
-          </aside>
+            </div>
 
-          {/* Main content area */}
-          <div className="flex-1 flex flex-col">
-            <header className="border-b border-border bg-card p-6 flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-foreground">Admin Dashboard</h2>
-              <div className="flex items-center gap-4">
-                <button className="w-10 h-10 rounded-full bg-gray-400 hover:bg-gray-500 flex items-center justify-center text-white font-bold">
-                  A
-                </button>
+            {/* User avatar */}
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-accent to-accent/70 hover:shadow-lg hover:shadow-accent/20 transition-all duration-200 flex items-center justify-center text-primary-foreground font-semibold">
+                A
               </div>
-            </header>
-
-            {/* Page content */}
-            <main className="flex-1 overflow-auto">{children}</main>
+            </div>
           </div>
-        </div>
+        </nav>
+
+        {/* Main content with top padding for fixed navbar */}
+        <main className="pt-20 min-h-screen bg-gradient-to-br from-background via-background to-card/20">
+          {children}
+        </main>
         <Analytics />
       </body>
     </html>

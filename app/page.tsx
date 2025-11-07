@@ -1,178 +1,106 @@
 "use client"
-
-import type React from "react"
-
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { PackagePlus, Send, Undo2, Users } from "lucide-react"
+import Link from "next/link"
 
 export default function DashboardPage() {
-  const [creating, setCreating] = useState(false)
-  const [issuing, setIssuing] = useState(false)
-  const [clawingBack, setClawingBack] = useState(false)
-
-  // Form state
-  const [assetCode, setAssetCode] = useState("")
-  const [totalSupply, setTotalSupply] = useState("")
-  const [investorAddress, setInvestorAddress] = useState("")
-  const [issueAmount, setIssueAmount] = useState("")
-  const [clawbackAddress, setClawbackAddress] = useState("")
-  const [clawbackAmount, setClawbackAmount] = useState("")
-
-  const handleCreateAsset = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setCreating(true)
-    try {
-      const response = await fetch("/api/create-asset", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ assetCode, totalSupply }),
-      })
-      if (response.ok) {
-        setAssetCode("")
-        setTotalSupply("")
-        alert("Asset created successfully!")
-      }
-    } catch (error) {
-      console.error("Error creating asset:", error)
-      alert("Failed to create asset")
-    } finally {
-      setCreating(false)
-    }
-  }
-
-  const handleIssueTokens = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIssuing(true)
-    try {
-      const response = await fetch("/api/issue-tokens", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ investorAddress, amount: issueAmount }),
-      })
-      if (response.ok) {
-        setInvestorAddress("")
-        setIssueAmount("")
-        alert("Tokens issued successfully!")
-      }
-    } catch (error) {
-      console.error("Error issuing tokens:", error)
-      alert("Failed to issue tokens")
-    } finally {
-      setIssuing(false)
-    }
-  }
-
-  const handleClawback = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setClawingBack(true)
-    try {
-      const response = await fetch("/api/clawback", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ investorAddress: clawbackAddress, amount: clawbackAmount }),
-      })
-      if (response.ok) {
-        setClawbackAddress("")
-        setClawbackAmount("")
-        alert("Clawback executed successfully!")
-      }
-    } catch (error) {
-      console.error("Error clawing back tokens:", error)
-      alert("Failed to clawback tokens")
-    } finally {
-      setClawingBack(false)
-    }
-  }
-
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-3 gap-6">
-        {/* Card 1: Tokenize a New Asset */}
-        <Card>
+    <div className="p-8 max-w-7xl mx-auto my-5">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-foreground mb-2 tracking-tight text-center">Dashboard</h1>
+        <p className="text-base text-muted-foreground text-center">Institutional RWA Tokenization Platform</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Tokenize Card */}
+        <Card className="border border-border/50 hover:bg-card/60 transition-all duration-300">
           <CardHeader>
-            <CardTitle>Tokenize a New Asset</CardTitle>
-            <CardDescription>Create a new tokenized asset</CardDescription>
+            <div className="flex items-center gap-2">
+              <PackagePlus className="w-5 h-5 text-primary" />
+              <CardTitle>Tokenize Asset</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleCreateAsset} className="space-y-4">
-              <Input
-                placeholder="Asset Code"
-                value={assetCode}
-                onChange={(e) => setAssetCode(e.target.value)}
-                required
-              />
-              <Input
-                placeholder="Total Supply"
-                type="number"
-                value={totalSupply}
-                onChange={(e) => setTotalSupply(e.target.value)}
-                required
-              />
-              <Button type="submit" disabled={creating} className="w-full">
-                {creating ? "Creating..." : "Create Asset"}
-              </Button>
-            </form>
+            <div className="flex justify-center mb-6">
+              <PackagePlus className="w-16 h-16 text-blue-500" />
+            </div>
+            <CardDescription>
+              Create a new compliant, on-chain representation of a real-world asset. Define its code, supply, and rules.
+            </CardDescription>
           </CardContent>
+          <CardFooter>
+            <Link href="/tokenize" className="w-full">
+              <Button className="w-full">Go to Tokenize</Button>
+            </Link>
+          </CardFooter>
         </Card>
 
-        {/* Card 2: Issue Tokens */}
-        <Card>
+        {/* Issue Card */}
+        <Card className="border border-border/50 hover:bg-card/60 transition-all duration-300">
           <CardHeader>
-            <CardTitle>Issue Tokens</CardTitle>
-            <CardDescription>Issue tokens to an investor</CardDescription>
+            <div className="flex items-center gap-2">
+              <Send className="w-5 h-5 text-primary" />
+              <CardTitle>Issue Tokens</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleIssueTokens} className="space-y-4">
-              <Input
-                placeholder="Investor Address"
-                value={investorAddress}
-                onChange={(e) => setInvestorAddress(e.target.value)}
-                required
-              />
-              <Input
-                placeholder="Amount"
-                type="number"
-                value={issueAmount}
-                onChange={(e) => setIssueAmount(e.target.value)}
-                required
-              />
-              <Button type="submit" disabled={issuing} className="w-full">
-                {issuing ? "Issuing..." : "Issue"}
-              </Button>
-            </form>
+            <div className="flex justify-center mb-6">
+              <Send className="w-16 h-16 text-blue-500" />
+            </div>
+            <CardDescription>
+              Distribute your newly tokenized assets to an approved, whitelisted investor. This is the primary distribution step.
+            </CardDescription>
           </CardContent>
+          <CardFooter>
+            <Link href="/issue" className="w-full">
+              <Button className="w-full">Go to Issue</Button>
+            </Link>
+          </CardFooter>
         </Card>
 
-        {/* Card 3: Clawback Tokens */}
-        <Card>
+        {/* Clawback Card */}
+        <Card className="border border-border/50 hover:bg-card/60 transition-all duration-300">
           <CardHeader>
-            <CardTitle>Clawback Tokens</CardTitle>
-            <CardDescription>Clawback tokens from an investor</CardDescription>
+            <div className="flex items-center gap-2">
+              <Undo2 className="w-5 h-5 text-destructive" />
+              <CardTitle>Clawback Tokens</CardTitle>
+            </div>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleClawback} className="space-y-4">
-              <Input
-                placeholder="Investor Address"
-                value={clawbackAddress}
-                onChange={(e) => setClawbackAddress(e.target.value)}
-                required
-              />
-              <Input
-                placeholder="Amount"
-                type="number"
-                value={clawbackAmount}
-                onChange={(e) => setClawbackAmount(e.target.value)}
-                required
-              />
-              <Button type="submit" variant="destructive" disabled={clawingBack} className="w-full">
-                {clawingBack ? "Processing..." : "Clawback Funds"}
-              </Button>
-            </form>
+            <div className="flex justify-center mb-6">
+              <Undo2 className="w-16 h-16 text-red-500" />
+            </div>
+            <CardDescription>
+              Retrieve tokens from an investor's wallet in case of a legal order, compliance failure, or critical error.
+            </CardDescription>
+          </CardContent>
+          <CardFooter>
+            <Link href="/clawback" className="w-full">
+              <Button variant="destructive" className="w-full">Go to Clawback</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        {/* Investor Directory Card */}
+        <Card className="md:col-span-3 mt-6 border border-border/50 hover:bg-card/60 transition-all duration-300">
+          <CardContent className="flex items-center justify-between p-6">
+            <div className="flex items-center gap-4">
+              <Users className="w-10 h-10 text-blue-500" />
+              <div>
+                <CardTitle>Investor Directory</CardTitle>
+                <CardDescription>
+                  Manage your whitelisted investors. Approve new requests and review access.
+                </CardDescription>
+              </div>
+            </div>
+            <Link href="/investors">
+              <Button>Go to Directory</Button>
+            </Link>
           </CardContent>
         </Card>
       </div>
+      
     </div>
   )
 }

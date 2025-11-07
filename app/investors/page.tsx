@@ -65,83 +65,109 @@ export default function InvestorsPage() {
   }
 
   return (
-    <div className="p-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Investor Management</CardTitle>
-          <CardDescription>Manage investor requests and approvals</CardDescription>
+    <div className="p-8 max-w-7xl mx-auto my-5">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold text-foreground mb-2 tracking-tight">Investor Management</h1>
+        <p className="text-base text-muted-foreground">Review, approve, and manage institutional investor access</p>
+      </div>
+
+      <Card className="border border-border bg-card/60 backdrop-blur-sm mx-auto">
+        <CardHeader className="border-b border-border/50 pb-6">
+          <CardTitle className="text-xl font-semibold text-foreground">Investor Directory</CardTitle>
+          <CardDescription className="text-muted-foreground text-sm">
+            Manage investor onboarding and access credentials
+          </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <Tabs defaultValue="pending" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="pending">Pending Requests</TabsTrigger>
-              <TabsTrigger value="approved">Approved Investors</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-input border border-border/50 p-1 mb-6 rounded-md">
+              <TabsTrigger
+                value="pending"
+                className="data-[state=active]:bg-accent/10 data-[state=active]:text-accent data-[state=active]:shadow-sm rounded-sm transition-all duration-200"
+              >
+                Pending Requests
+              </TabsTrigger>
+              <TabsTrigger
+                value="approved"
+                className="data-[state=active]:bg-accent/10 data-[state=active]:text-accent data-[state=active]:shadow-sm rounded-sm transition-all duration-200"
+              >
+                Approved Investors
+              </TabsTrigger>
             </TabsList>
 
             {/* Pending Requests Tab */}
             <TabsContent value="pending" className="mt-4">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Investor Address</TableHead>
-                    <TableHead>Request Date</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {pending.length === 0 ? (
-                    <TableRow>
-                      <TableCell colSpan={3} className="text-center text-muted-foreground py-6">
-                        No pending requests
-                      </TableCell>
+              <div className="border border-border/50 rounded-md overflow-hidden">
+                <Table>
+                  <TableHeader className="bg-input/30 border-b border-border/50">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-foreground font-semibold">Investor Address</TableHead>
+                      <TableHead className="text-foreground font-semibold">Request Date</TableHead>
+                      <TableHead className="text-foreground font-semibold">Actions</TableHead>
                     </TableRow>
-                  ) : (
-                    pending.map((request) => (
-                      <TableRow key={request.id}>
-                        <TableCell className="font-mono text-sm">{request.address}</TableCell>
-                        <TableCell>{request.date}</TableCell>
-                        <TableCell className="flex gap-2">
-                          <Button
-                            size="sm"
-                            variant="default"
-                            onClick={() => handleApprove(request.id, request.address)}
-                            disabled={approving === request.id}
-                            className="bg-green-600 hover:bg-green-700"
-                          >
-                            {approving === request.id ? "Approving..." : "Approve"}
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="destructive"
-                            onClick={() => handleReject(request.id, request.address)}
-                            disabled={rejecting === request.id}
-                          >
-                            {rejecting === request.id ? "Rejecting..." : "Reject"}
-                          </Button>
+                  </TableHeader>
+                  <TableBody>
+                    {pending.length === 0 ? (
+                      <TableRow className="hover:bg-transparent">
+                        <TableCell colSpan={3} className="text-center text-muted-foreground py-8">
+                          No pending requests
                         </TableCell>
                       </TableRow>
-                    ))
-                  )}
-                </TableBody>
-              </Table>
+                    ) : (
+                      pending.map((request) => (
+                        <TableRow
+                          key={request.id}
+                          className="hover:bg-input/30 border-b border-border/50 transition-colors duration-200"
+                        >
+                          <TableCell className="font-mono text-sm text-foreground">{request.address}</TableCell>
+                          <TableCell className="text-muted-foreground">{request.date}</TableCell>
+                          <TableCell className="flex gap-2">
+                            <Button
+                              size="sm"
+                              onClick={() => handleApprove(request.id, request.address)}
+                              disabled={approving === request.id}
+                              className="bg-accent hover:bg-accent/90 text-primary-foreground font-medium transition-all duration-200 shadow-sm"
+                            >
+                              {approving === request.id ? "Approving..." : "Approve"}
+                            </Button>
+                            <Button
+                              size="sm"
+                              onClick={() => handleReject(request.id, request.address)}
+                              disabled={rejecting === request.id}
+                              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground font-medium transition-all duration-200 shadow-sm"
+                            >
+                              {rejecting === request.id ? "Rejecting..." : "Reject"}
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
             </TabsContent>
 
             {/* Approved Investors Tab */}
             <TabsContent value="approved" className="mt-4">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Investor Address</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {approvedInvestors.map((investor) => (
-                    <TableRow key={investor.id}>
-                      <TableCell className="font-mono text-sm">{investor.address}</TableCell>
+              <div className="border border-border/50 rounded-md overflow-hidden">
+                <Table>
+                  <TableHeader className="bg-input/30 border-b border-border/50">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-foreground font-semibold">Investor Address</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {approvedInvestors.map((investor) => (
+                      <TableRow
+                        key={investor.id}
+                        className="hover:bg-input/30 border-b border-border/50 transition-colors duration-200"
+                      >
+                        <TableCell className="font-mono text-sm text-foreground">{investor.address}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </TabsContent>
           </Tabs>
         </CardContent>
