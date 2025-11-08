@@ -1,8 +1,13 @@
 import core, { sendMPT, createMPTIssuanceWithClawback, assertAddress } from "@/lib/xrpl-logic"
+// Ensure listener autostart on first use of this route
+import "@/app/api/_worker/auto-start-listener";
+export const runtime = 'nodejs'
 import { toHttpError } from "@/app/api/_http";
+import { startPaymentsListener } from "@/app/api/_worker/payments-listener";
 
 export async function POST(request: Request) {
   try {
+    await startPaymentsListener();
     const body = await request.json()
     const { destination, units, mptIssuanceId: provided } = body as { destination: string, units: string, mptIssuanceId?: string }
     assertAddress(destination)

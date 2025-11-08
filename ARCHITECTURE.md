@@ -105,3 +105,21 @@ Notes:
 - `lib` holds XRPL integration and utilities (wallets, client, MPT ops).
 
 End of layout.
+
+## XUMM Integration
+
+To enable XUMM (Xaman) signing flows set the following environment variables in a local `.env` (never commit this file):
+
+```
+XUMM_API_KEY=your_xumm_api_key
+XUMM_API_SECRET=your_xumm_api_secret
+```
+
+Acquire these credentials by registering an app at https://apps.xumm.dev. After creating a new app, copy the API Key and Secret. Treat them as sensitive and add them only to your deployment secrets or local `.env`.
+
+Server-side helper functions live in `lib/xumm.ts`:
+
+- `createSignRequest(txjson, { expiresIn? })` creates a signing payload and returns QR & WebSocket refs plus a redirect link.
+- `getPayloadStatus(uuid)` fetches minimal payload status (`uuid, resolved, signed, txid, account, dispatched_result?`).
+
+They throw if env vars are missing or the API returns an error. Only import them in server code (e.g. Next.js Route Handlers) to avoid leaking secrets.

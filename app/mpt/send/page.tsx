@@ -93,7 +93,7 @@ export default function SendMPTPage() {
               </div>
             </CardHeader>
             <CardContent className="pt-6">
-              <form onSubmit={handleSend} className="space-y-6">
+              <form onSubmit={handleSend} className="space-y-6" suppressHydrationWarning>
                 <div>
                   <label className="text-xs font-semibold text-foreground mb-2 block uppercase tracking-wide">Destination Address</label>
                   <Input

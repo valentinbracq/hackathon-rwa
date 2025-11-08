@@ -95,7 +95,7 @@ export default function MPTBalancePage() {
                   </Alert>
                 </div>
               )}
-              <form onSubmit={handleRead} className="space-y-6">
+              <form onSubmit={handleRead} className="space-y-6" suppressHydrationWarning>
                 <div>
                   <label className="text-xs font-semibold text-foreground mb-2 block uppercase tracking-wide">Issuance ID</label>
                   <Input

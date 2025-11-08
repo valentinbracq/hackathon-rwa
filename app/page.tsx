@@ -1,7 +1,7 @@
 "use client"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { PackagePlus, Send, Undo2, Users } from "lucide-react"
+import { PackagePlus, Undo2, Users } from "lucide-react"
 import Link from "next/link"
 
 export default function DashboardPage() {
@@ -40,21 +40,21 @@ export default function DashboardPage() {
         <Card className="border border-border/50 hover:bg-card/60 transition-all duration-300">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Send className="w-5 h-5 text-primary" />
-              <CardTitle>Issue Tokens</CardTitle>
+              <Users className="w-5 h-5 text-primary" />
+              <CardTitle>Check Sales</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <div className="flex justify-center mb-6">
-              <Send className="w-16 h-16 text-blue-500" />
+              <Users className="w-16 h-16 text-blue-500" />
             </div>
             <CardDescription>
-              Distribute your newly tokenized assets to an approved, whitelisted investor. This is the primary distribution step.
+              Pending XRP payments to be settled as MPT units
             </CardDescription>
           </CardContent>
           <CardFooter>
-            <Link href="/mpt/send" className="w-full">
-              <Button className="w-full">Go to Issue</Button>
+            <Link href="/mpt/sales" className="w-full">
+              <Button className="w-full">Go to Sales</Button>
             </Link>
           </CardFooter>
         </Card>

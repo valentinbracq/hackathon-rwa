@@ -57,9 +57,10 @@ export default function RootLayout({
               </a>
               <a href="/mpt/create-issuance" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Create Issuance</a>
               <a href="/mpt/authorize" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Authorize</a>
-              <a href="/mpt/send" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Send</a>
+              {/* Removed Send nav item */}
               <a href="/mpt/clawback" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Clawback</a>
               <a href="/mpt/balance" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Balance</a>
+              <a href="/mpt/sales" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Sales</a>
             </div>
 
             {/* User avatar */}

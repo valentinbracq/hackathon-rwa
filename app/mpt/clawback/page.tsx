@@ -71,7 +71,7 @@ export default function MPTClawbackPage() {
               </div>
             </CardHeader>
             <CardContent className="pt-6">
-              <form onSubmit={handleClawback} className="space-y-6">
+              <form onSubmit={handleClawback} className="space-y-6" suppressHydrationWarning>
                 <div>
                   <label className="text-xs font-semibold text-foreground mb-2 block uppercase tracking-wide">Holder Address</label>
                   <Input

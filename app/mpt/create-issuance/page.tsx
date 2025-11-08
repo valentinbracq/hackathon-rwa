@@ -90,7 +90,7 @@ export default function CreateIssuancePage() {
               </div>
             </CardHeader>
             <CardContent className="pt-6">
-              <form onSubmit={handleCreate} className="space-y-6">
+              <form onSubmit={handleCreate} className="space-y-6" suppressHydrationWarning>
                 <div>
                   <label className="text-xs font-semibold text-foreground mb-2 block uppercase tracking-wide">Asset Scale</label>
                   <Input

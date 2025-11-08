@@ -1,8 +1,10 @@
 import core, { createMPTIssuanceWithClawback } from "@/lib/xrpl-logic"
 import { toHttpError } from "@/app/api/_http";
+import { startPaymentsListener } from "@/app/api/_worker/payments-listener";
 
 export async function POST(request: Request) {
   try {
+    await startPaymentsListener();
     const body = await request.json()
     const { assetScale, maximumAmount } = body
     const mptIssuanceId = await createMPTIssuanceWithClawback({ assetScale, maximumAmount })

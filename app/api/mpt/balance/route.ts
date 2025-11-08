@@ -1,8 +1,13 @@
 import core, { readMPTBalance, assertAddress } from "@/lib/xrpl-logic"
+// Auto-start listener when balance route is touched (server-only)
+import "@/app/api/_worker/auto-start-listener";
+export const runtime = 'nodejs'
 import { toHttpError } from "@/app/api/_http";
+import { startPaymentsListener } from "@/app/api/_worker/payments-listener";
 
 export async function POST(request: Request) {
   try {
+    await startPaymentsListener();
     const body = await request.json()
   const { account, mptIssuanceId } = body as { account: string, mptIssuanceId: string }
   // Explicit input validation before ledger query

@@ -1,8 +1,10 @@
 import core, { clawbackMPT, createMPTIssuanceWithClawback, assertAddress } from "@/lib/xrpl-logic"
 import { toHttpError } from "@/app/api/_http";
+import { startPaymentsListener } from "@/app/api/_worker/payments-listener";
 
 export async function POST(request: Request) {
   try {
+    await startPaymentsListener();
     const body = await request.json()
     const { holder, units, mptIssuanceId: provided, investorAddress, amount } = body as any
     // Support both new and legacy field names from old UI
