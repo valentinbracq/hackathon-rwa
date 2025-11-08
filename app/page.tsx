@@ -30,7 +30,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardContent>
           <CardFooter>
-            <Link href="/tokenize" className="w-full">
+            <Link href="/mpt/create-issuance" className="w-full">
               <Button className="w-full">Go to Tokenize</Button>
             </Link>
           </CardFooter>
@@ -53,7 +53,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardContent>
           <CardFooter>
-            <Link href="/issue" className="w-full">
+            <Link href="/mpt/send" className="w-full">
               <Button className="w-full">Go to Issue</Button>
             </Link>
           </CardFooter>
@@ -76,7 +76,7 @@ export default function DashboardPage() {
             </CardDescription>
           </CardContent>
           <CardFooter>
-            <Link href="/clawback" className="w-full">
+            <Link href="/mpt/clawback" className="w-full">
               <Button variant="destructive" className="w-full">Go to Clawback</Button>
             </Link>
           </CardFooter>
@@ -94,7 +94,7 @@ export default function DashboardPage() {
                 </CardDescription>
               </div>
             </div>
-            <Link href="/investors">
+            <Link href="/mpt/authorize">
               <Button>Go to Directory</Button>
             </Link>
           </CardContent>

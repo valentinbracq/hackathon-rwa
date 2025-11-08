@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+import { Toaster } from "@/components/ui/toaster"
 
 const _inter = Inter({ subsets: ["latin"] })
 
@@ -54,30 +55,11 @@ export default function RootLayout({
               >
                 Dashboard
               </a>
-              <a
-                href="/tokenize"
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
-              >
-                Tokenize
-              </a>
-              <a
-                href="/issue"
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
-              >
-                Issue
-              </a>
-              <a
-                href="/clawback"
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
-              >
-                Clawback
-              </a>
-              <a
-                href="/investors"
-                className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200"
-              >
-                Investors
-              </a>
+              <a href="/mpt/create-issuance" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Create Issuance</a>
+              <a href="/mpt/authorize" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Authorize</a>
+              <a href="/mpt/send" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Send</a>
+              <a href="/mpt/clawback" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Clawback</a>
+              <a href="/mpt/balance" className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200">Balance</a>
             </div>
 
             {/* User avatar */}
@@ -92,6 +74,7 @@ export default function RootLayout({
         {/* Main content with top padding for fixed navbar */}
         <main className="pt-20 min-h-screen bg-gradient-to-br from-background via-background to-card/20">
           {children}
+          <Toaster />
         </main>
         <Analytics />
       </body>
